@@ -1,0 +1,17 @@
+base de datos
+jdpsoluc_ecotierraPromjosdom*
+
+
+
+ftp 
+ecotierra@jdpsoluciones.com
+Promjosdom*
+
+
+git
+https://github.com/juniorjmd/jdpsoluc_ecotierra
+
+
+url aplicacion
+
+http://ecotierra.jdpsoluciones.com/
