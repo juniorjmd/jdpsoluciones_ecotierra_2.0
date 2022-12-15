@@ -16,29 +16,35 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatIconModule} from '@angular/material/icon'; 
 import {MatTreeModule} from '@angular/material/tree';
 import {MatListModule} from '@angular/material/list';
-import {MatExpansionModule} from '@angular/material/expansion';
-import { EditmapComponent } from './editmap/editmap.component';
-import { HeaderComponent } from './components/header/header.component';
+import {MatExpansionModule} from '@angular/material/expansion'; 
+import { EditmapComponent } from './components/editmap/editmap.component';
+import { FormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
     AppComponent,
-    MapsComponent,
-    EditmapComponent,
-    HeaderComponent
+    MapsComponent, 
+    EditmapComponent
   ],
   imports: [
+    FormsModule,
+    HttpClientModule,
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-
-    
-
-
-
+    MatToolbarModule,
+    MatButtonModule,
+    MatDialogModule,
+    MatInputModule,
+    MatSelectModule,
+    MatTreeModule,
+    MatIconModule,
+    MatListModule,
+    MatExpansionModule
   ],
-  providers: [],
+  providers: [MapasService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

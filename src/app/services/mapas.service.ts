@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-
 import { HttpClient } from '@angular/common/http';
 import { Mapa } from '../models/mapa';
 
@@ -8,27 +7,42 @@ import { Mapa } from '../models/mapa';
 })
 export class MapasService {
   URL = 'http://ecotierra.jdpsoluciones.com/API/';
-  constructor(private http: HttpClient) { }
-
-  obtenerUsuarios() {
-    return this.http.get(`${this.URL}listarPuntos.php`);
+  constructor(private http: HttpClient) { 
+    console.log('servicio mapas inicializado');
+    
   }
 
-  altaUsuario(usuario: Mapa) {
-    return this.http.post(`${this.URL}insertarPunto.php`, JSON.stringify(usuario));
+  obtenerMapas() {
+    const uri = `${this.URL}listarPuntos.php`;
+    console.log(uri);
+    
+    return this.http.get<Mapa[]>(uri);
   }
 
-  bajaUsuario(idUsuario: number) {
-    return this.http.get(`${this.URL}eliminarPunto.php?idUsuario=${idUsuario}`);
+  altaMapa(Mapa: Mapa) {
+    const uri = `${this.URL}insertarPunto.php`;
+    console.log(uri);
+    
+    return this.http.post(uri, JSON.stringify(Mapa));
   }
 
-  seleccionarUsuario(idUsuario: number) {
-    return this.http.get(`${this.URL}seleccionarPunto.php?idMapa=${idUsuario}`);
+  bajaMapa(idMapa: number) {
+    const uri = `${this.URL}eliminarPunto.php`;
+    console.log(uri);
+    return this.http.get<Mapa[]>(`${uri}?idMapa=${idMapa}`);
   }
 
-  editarUsuario(usuario: Mapa) {
-    console.log("jelou",usuario);
-    return this.http.post(`${this.URL}editarPunto.php`, JSON.stringify(usuario));
+  seleccionarMapa(idMapa: number) {
+    const uri = `${this.URL}seleccionarPunto.php`;
+    console.log(uri);
+    return this.http.get<Mapa[]>(`${uri}?idMapa=${idMapa}`);
+  }
+
+  editarMapa(Mapa: Mapa) {
+    const uri = `${this.URL}editarPunto.php`;
+    console.log(uri);
+    console.log("jelou",Mapa);
+    return this.http.post(uri, JSON.stringify(Mapa));
   }
 
 

@@ -1,0 +1,8 @@
+[15-Dec-2022 12:46:36 America/Bogota] PHP Notice:  Undefined index: idUsuario in /home/jdpsoluc/public_html/ecotierra/API/eliminarPunto.php on line 11
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'latitud' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 15
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'longitud' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 16
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'id' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 17
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'latitud' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 25
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'longitud' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 25
+[15-Dec-2022 12:49:10 America/Bogota] PHP Notice:  Trying to get property 'id' of non-object in /home/jdpsoluc/public_html/ecotierra/API/editarPunto.php on line 25
+[15-Dec-2022 12:57:58 America/Bogota] PHP Notice:  Undefined index: idUsuario in /home/jdpsoluc/public_html/ecotierra/API/eliminarPunto.php on line 11

@@ -2,6 +2,7 @@ import { AfterViewInit, Component } from '@angular/core';
 import * as L from 'leaflet';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MapasService } from 'src/app/services/mapas.service';
+import { Mapa } from '../../models/mapa';
 
 const iconRetinaUrl = 'assets/marker-icon-2x.png';
 const iconUrl = 'assets/marker-icon.png';
@@ -17,6 +18,7 @@ const iconDefault = L.icon({
   shadowSize: [41, 41]
 });
 L.Marker.prototype.options.icon = iconDefault;
+
 @Component({
   selector: 'app-maps',
   templateUrl: './maps.component.html',
@@ -61,6 +63,7 @@ export class MapsComponent implements AfterViewInit {
       center: [ 39.8282, -98.5795 ],
       zoom: 3
     });
+    
 
     const tiles = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 18,
@@ -72,18 +75,22 @@ export class MapsComponent implements AfterViewInit {
   }
 
   ngOnInit() {
-    this.obtenerUsuarios();
+    this.obtenerMapas();
   }
 
-  obtenerUsuarios() {
-    this.mapasServicio.obtenerUsuarios().subscribe(
-      (res: any) => {
-        console.log(res);
-        this.mapas = res;
-        this.makeCapitalMarkers(this.map);
+  obtenerMapas() {
+    this.mapas = [];
+    this.mapasServicio.obtenerMapas().subscribe(
+      {next : (res: any) => {
+        console.log('llego',res);
+        if (res){ this.mapas = res;
+          this.makeCapitalMarkers(this.map);}else{
+            alert('no existen puntos en el mapa que mostrar')
+          }
+       
       },
-      (err : any ) => console.log(err)
-
+      error : (err : any ) => console.log(err) 
+    }
     );
   }
 
@@ -96,63 +103,65 @@ export class MapsComponent implements AfterViewInit {
   }
 
   makeCapitalMarkers(map: L.Map): void {
-    console.log("holaaas",this.mapas);
+    console.log("inicio markers",this.mapas);
       for (const c of this.mapas) {
         const lon = c.longitud;
         const lat = c.latitud;
         const marker = L.marker([lat, lon]);
-        console.log("holaaas",map);
+        console.log("registro",map);
         marker.addTo(map);
       }
 
   }
 
-  altaUsuario() {
-    this.mapasServicio.altaUsuario(this.mapa).subscribe(
-      (res : any ) => {
+  altaMapa() {
+    this.mapasServicio.altaMapa(this.mapa).subscribe(
+     { next : (res : any ) => {
         console.log(res);
         alert("El punto fue registrado con exito");
-        this.obtenerUsuarios();
+        this.obtenerMapas();
         this.makeCapitalMarkers(this.map);
-      },
-      (err : any ) => console.error(err)
-    );
-  } 
+      }  ,
+      error : (err : any ) => console.error(err) }
+    )
+  };
+  
 
-  bajaUsuario(idMapa: number) {
-    this.mapasServicio.bajaUsuario(idMapa).subscribe(
-      (res : any ) => {
+  bajaMapa(idMapa: number) {
+    this.mapasServicio.bajaMapa(idMapa).subscribe(
+      { next : (res : any ) => {
         console.log(res);
-        this.obtenerUsuarios();
+        this.obtenerMapas();
         alert("El punto fue eliminado con exito");
-        this.obtenerUsuarios();
+        this.obtenerMapas();
         this.makeCapitalMarkers(this.map);
       },
-      (err : any ) => console.error(err)
+       
+      error :(err : any ) => console.error(err) }
     );
   }
 
-  editarUsuario() {
-    this.mapasServicio.editarUsuario(this.mapaseleccionado).subscribe(
-      (res : any ) => {
+  editarMapa() {
+    this.mapasServicio.editarMapa(this.mapaseleccionado).subscribe(
+      {next :(res : any ) => {
         console.log(res);
         alert("El punto fue editado con exito");
-        this.obtenerUsuarios();
+        this.obtenerMapas();
         this.makeCapitalMarkers(this.map);
       },
-      (err : any ) => console.error(err)
+      error : (err : any ) => console.error(err) }
     );
   }
 
-  seleccionarUsuario(idMapa: number) {
+  seleccionarMapa(idMapa: number) {
     console.log(idMapa)
-    this.mapasServicio.seleccionarUsuario(idMapa).subscribe(
-      (res: any) => {
+    this.mapasServicio.seleccionarMapa(idMapa).subscribe(
+      { next : (res: any) => {
         console.log(res);
         this.mapaseleccionado = res[0];
         this.makeCapitalMarkers(this.map);
       },
-      (err : any ) => console.error(err)
+       error:(err : any ) => console.error(err) }
     );
   }
 }
