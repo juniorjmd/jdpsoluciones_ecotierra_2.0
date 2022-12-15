@@ -8,7 +8,8 @@
   $conexion = conexion(); // CREA LA CONEXION
   
   // REALIZA LA QUERY A LA DB
-  mysqli_query($conexion, "DELETE FROM mapa WHERE id=$_GET[idUsuario]");
+  $idUsuario = $_POST['idUsuario'];
+  mysqli_query($conexion, "DELETE FROM mapa WHERE id=$idUsuario");
     
   
   class Result {}

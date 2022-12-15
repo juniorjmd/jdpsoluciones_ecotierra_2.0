@@ -52,8 +52,8 @@ export class MapsComponent implements AfterViewInit {
     latitud: 0
   }
 
-  mapaseleccionado = {
-    idMapa: 0,
+  mapaseleccionado:Mapa = {
+    id: 0,
     longitud: 0,
     latitud: 0
   }
@@ -77,19 +77,54 @@ export class MapsComponent implements AfterViewInit {
   ngOnInit() {
     this.obtenerMapas();
   }
+  guardarMapa(){
+    this.mapasServicio.ingresarMapa(this.mapa).subscribe(
+      { next : (res ) => {
+         console.log(res);
+         if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
+          alert("El punto fue registrado con exito");
+         this.obtenerMapas();
+         this.makeCapitalMarkers(this.map);}
+          else{
+            alert(res.RESPONS)
+          }
+        
+       }  ,
+       error : (err ) => console.error(err) }
+     )
+  }
+  borrarMapa(idMapa: number){
+    this.mapasServicio.borrarMapa(idMapa).subscribe(
+      { next : (res ) => {
+         console.log(res);
+         if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
+          alert("El punto fue eliminado con exito");
+         this.obtenerMapas();
+        }
+          else{
+            alert(res.RESPONS)
+          }
+        
+       }  ,
+       error : (err ) => console.error(err) }
+     )
+  }
 
   obtenerMapas() {
     this.mapas = [];
     this.mapasServicio.obtenerMapas().subscribe(
-      {next : (res: any) => {
+      {next : (res) => {
         console.log('llego',res);
-        if (res){ this.mapas = res;
-          this.makeCapitalMarkers(this.map);}else{
-            alert('no existen puntos en el mapa que mostrar')
+        if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){ 
+          this.mapas = res.datos;
+          this.makeCapitalMarkers(this.map);
+        }
+          else{
+            alert(res.RESPONS)
           }
        
       },
-      error : (err : any ) => console.log(err) 
+      error : (err ) => console.log(err) 
     }
     );
   }
@@ -126,6 +161,7 @@ export class MapsComponent implements AfterViewInit {
     )
   };
   
+ 
 
   bajaMapa(idMapa: number) {
     this.mapasServicio.bajaMapa(idMapa).subscribe(
@@ -153,7 +189,7 @@ export class MapsComponent implements AfterViewInit {
     );
   }
 
-  seleccionarMapa(idMapa: number) {
+  _seleccionarMapa(idMapa: number) {
     console.log(idMapa)
     this.mapasServicio.seleccionarMapa(idMapa).subscribe(
       { next : (res: any) => {
@@ -162,6 +198,29 @@ export class MapsComponent implements AfterViewInit {
         this.makeCapitalMarkers(this.map);
       },
        error:(err : any ) => console.error(err) }
+    );
+  }
+
+
+
+  seleccionarMapa(idMapa: number)  {
+    this.mapas = [];
+    this.mapasServicio.seleccionarMapa(idMapa).subscribe(
+      {next : (res) => {
+        console.log('llego',res);
+        if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){ 
+          //this.mapas = res.datos;
+           res.datos
+        this.mapaseleccionado =  (res.datos[0]!== undefined) ? res.datos[0] : this.mapaseleccionado     ;
+          this.makeCapitalMarkers(this.map);
+        }
+          else{
+            alert(res.RESPONS)
+          }
+       
+      },
+      error : (err ) => console.log(err) 
+    }
     );
   }
 }

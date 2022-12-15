@@ -21,7 +21,7 @@
                 <input matInput type="number" [(ngModel)]="mapa.latitud">
             </mat-form-field>
             <mat-action-row>
-                <button mat-button color="primary" (click)="altaMapa()">Registrar</button>
+                <button mat-button color="primary" (click)="guardarMapa()">Registrar</button>
             </mat-action-row>
         </mat-expansion-panel>
 
@@ -42,7 +42,7 @@
                     <p matListItemLine>{{message.latitud}}</p>
                     <p matListItemLine class="demo-2">{{message.longitud}}</p>
                     <mat-action-row>
-                        <button mat-button color="warn" (click)="bajaMapa(message.id)"> Borrar </button>
+                        <button mat-button color="warn" (click)="borrarMapa(message.id)"> Borrar </button>
                         <button mat-button color="primary" (click)="seleccionarMapa(message.id)"> Seleccionar </button>
                     </mat-action-row>
 
