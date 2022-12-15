@@ -1,5 +1,6 @@
 base de datos
-jdpsoluc_ecotierraPromjosdom*
+jdpsoluc_ecotierra
+Promjosdom*
 
 
 
@@ -14,4 +15,4 @@ https://github.com/juniorjmd/jdpsoluc_ecotierra
 
 url aplicacion
 
-http://ecotierra.jdpsoluciones.com/
+https://ecotierra.jdpsoluciones.com/

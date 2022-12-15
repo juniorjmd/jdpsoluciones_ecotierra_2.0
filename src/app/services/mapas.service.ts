@@ -6,7 +6,7 @@ import { Mapa } from '../models/mapa';
   providedIn: 'root'
 })
 export class MapasService {
-  URL = 'http://ecotierra.jdpsoluciones.com/API/';
+  URL = 'https://ecotierra.jdpsoluciones.com/API/';
   constructor(private http: HttpClient) { 
     console.log('servicio mapas inicializado');
     
