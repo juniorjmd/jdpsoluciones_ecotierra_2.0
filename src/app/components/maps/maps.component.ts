@@ -142,9 +142,8 @@ export class MapsComponent implements AfterViewInit {
       for (const c of this.mapas) {
         const lon = c.longitud;
         const lat = c.latitud;
-        const marker = L.marker([lat, lon]);
-        console.log("registro",map);
-        marker.addTo(map);
+        L.marker([lat, lon],{draggable: true}).addTo(map);
+       
       }
 
   }
@@ -177,7 +176,7 @@ export class MapsComponent implements AfterViewInit {
     );
   }
 
-  editarMapa() {
+  _editarMapa() {
     this.mapasServicio.editarMapa(this.mapaseleccionado).subscribe(
       {next :(res : any ) => {
         console.log(res);
@@ -186,6 +185,25 @@ export class MapsComponent implements AfterViewInit {
         this.makeCapitalMarkers(this.map);
       },
       error : (err : any ) => console.error(err) }
+    );
+  }
+
+
+  editarMapa() {
+    this.mapasServicio.editarMapa(this.mapaseleccionado).subscribe(
+      { next : (res ) => {
+        console.log(res);
+        if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
+         alert("El punto fue editado con exito");
+        this.obtenerMapas();
+       }
+         else{
+           alert(res.RESPONS)
+         }
+       
+      }  ,
+      error : (err ) => console.error(err) }
+      
     );
   }
 

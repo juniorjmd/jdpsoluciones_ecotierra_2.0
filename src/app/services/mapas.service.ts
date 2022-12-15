@@ -88,7 +88,7 @@ export class MapasService {
     action : 'UPDATE_MAPA',
     Mapa 
   } 
-    return this.http.post(this.URL,action);
+    return this.http.post<MapaRequest>(this.URL,action);
   }
 
   _editarMapa(Mapa: Mapa) {
