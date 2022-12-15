@@ -222,7 +222,7 @@ export class MapsComponent implements AfterViewInit {
 
 
   seleccionarMapa(idMapa: number)  {
-    this.mapas = [];
+   
     this.mapasServicio.seleccionarMapa(idMapa).subscribe(
       {next : (res) => {
         console.log('llego',res);
