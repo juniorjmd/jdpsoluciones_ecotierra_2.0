@@ -12,12 +12,15 @@
   
   // REALIZA LA QUERY A LA DB
   mysqli_query($conexion, "INSERT INTO mapa(longitud, latitud) VALUES
-                  ($params->longitud,$params->latitud)");    
+                  ($params->longitud,$params->latitud)");   
+  
+  
   
   class Result {}
 
   // GENERA LOS DATOS DE RESPUESTA
   $response = new Result();
+  $response->query= "INSERT INTO mapa(longitud, latitud) VALUES ($params->longitud,$params->latitud)";
   $response->resultado = 'OK';
   $response->mensaje = 'SE REGISTRO EXITOSAMENTE EL USUARIO';
 
