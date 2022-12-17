@@ -13,14 +13,7 @@ export class MapasService {
     
   }
 
-
- _obtenerMapas() {
-    const uri = `${this.URL}listarPuntos.php`;
-    console.log(uri);
-   
-    
-    return this.http.get<Mapa[]>(uri);
-  }
+ 
 
    obtenerMapas() { 
     const action = {
@@ -35,7 +28,8 @@ export class MapasService {
     const action = {
       action : 'SET_MAPA',
       latitud: Mapa.latitud , 
-      longitud : Mapa.longitud
+      longitud : Mapa.longitud , 
+      desc : Mapa.desc
     } 
     console.log(this.URL ,action );
     
@@ -65,13 +59,7 @@ export class MapasService {
     return this.http.get(`${uri}?idMapa=${idMapa}`);
   }
 
-  _seleccionarMapa(idMapa: number) {
-    const uri = `${this.URL}seleccionarPunto.php`;
-    console.log(uri);
-    // return this.http.get<Mapa[]>(`${uri}?idMapa=${idMapa}`);
-    return this.http.post(uri, JSON.stringify({  idMapa : idMapa }));
-  }
-
+  
   seleccionarMapa(_ID_MAPA: number) {
     const action = {
       action : 'GET_MAPAS',

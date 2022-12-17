@@ -1,0 +1,12 @@
+<ul class="nav  flex-column">
+    <li class="nav-item">
+        <a class="nav-link disabled">DASHBOARD</a>
+    </li>
+    <li [ngClass]="(active[0])?'nav-link sideBarActive' :  'nav-link'">
+        <a class="nav-link" (click)="trueActive(0)" aria-current="page" routerLink="mapas">MAPA</a>
+    </li>
+    <li [ngClass]="(active[1])?'nav-link sideBarActive' :  'nav-link'">
+        <a class="nav-link" (click)="trueActive(1)" routerLink="listas">LISTA</a>
+    </li>
+
+</ul>

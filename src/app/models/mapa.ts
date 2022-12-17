@@ -1,5 +1,6 @@
 export interface Mapa {
-    id?: number;
+    id : number;
     longitud?: number;
     latitud?: number;
-}
+    desc?:string
+} 

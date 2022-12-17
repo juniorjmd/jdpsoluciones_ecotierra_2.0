@@ -65,12 +65,9 @@ foreach ($_POST as $clave => $valor){
 	 try{ $_DATA["datos"]=$_POST;
 		 $mysqli = cargarBD(DATABASE_NAME,HOST,PASS,USERDB);
 		 $aux_where = '';
-        $query = "INSERT INTO  `mapa` ( `longitud`, `latitud`)".
+        $query = "INSERT INTO  `mapa` ( `longitud`, `latitud`, `desc`)".
                          " VALUES ".
-                         " ( $longitud, $latitud );";
-                 
-                 
-                 
+                         " ( $longitud, $latitud , '$desc' );"; 
 		 $_DATA["query"] = $query;  
 		 $result = $mysqli->query($query);
 		
@@ -105,9 +102,13 @@ foreach ($_POST as $clave => $valor){
                  $_ID_MAPA = $Mapa['id'] ;
                  $_latitud = $Mapa['latitud'] ;
                  $_longitud = $Mapa['longitud'] ;
+                 $_desc = trim($Mapa['desc']) ;
+                 
+                 
         $query = "update `mapa` set"
                 . " latitud = $_latitud"
                 . ", longitud = $_longitud"
+                . ", desc = '$_desc'"
                 . "  WHERE id =   $_ID_MAPA ;";
                  
                  

@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { MapsComponent } from './components/maps/maps.component';
+import { AppComponent } from './app.component'; 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { MapasService } from './services/mapas.service'; 
@@ -20,12 +19,21 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { EditmapComponent } from './components/editmap/editmap.component';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { BodyComponent } from './components/body/body.component';
+import { MapasComponent } from './components/mapas/mapas.component';
+import { ListasComponent } from './components/listas/listas.component';
+import { HeaderComponent } from './components/header/header.component';
+import { HomeComponent } from './components/home/home.component';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    MapsComponent, 
-    EditmapComponent
+    AppComponent,  HeaderComponent,
+    EditmapComponent,
+     BodyComponent, 
+     MapasComponent, ListasComponent, HomeComponent, SidebarComponent, BienvenidaComponent
   ],
   imports: [
     FormsModule,
@@ -42,7 +50,9 @@ import { HttpClientModule } from '@angular/common/http';
     MatTreeModule,
     MatIconModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    FontAwesomeModule,
+    AppRoutingModule
   ],
   providers: [MapasService],
   bootstrap: [AppComponent]
