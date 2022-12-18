@@ -27,6 +27,7 @@ import { HomeComponent } from './components/home/home.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { NgxSortableModule } from 'ngx-sortable';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     MatListModule,
     MatExpansionModule,
     FontAwesomeModule,
-    AppRoutingModule
+    AppRoutingModule,NgxSortableModule 
   ],
   providers: [MapasService],
   bootstrap: [AppComponent]

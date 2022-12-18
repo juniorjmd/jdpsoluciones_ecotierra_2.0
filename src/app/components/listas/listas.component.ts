@@ -37,6 +37,9 @@ export class ListasComponent {
     }
     );
   }
+  listSorted(e:any){
+
+  }
   borrarMapa( Mapa: Mapa){
 
     Swal.fire({

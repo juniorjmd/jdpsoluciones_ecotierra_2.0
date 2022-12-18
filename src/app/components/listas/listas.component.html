@@ -9,16 +9,17 @@
             <th>Opciones</th>
         </tr>
     </thead>
-    <tbody>
-        <tr *ngFor="let punto of puntos">
-            <td scope="row">{{punto.id}}</td>
+</table>
+<ngx-sortable [items]="puntos" [name]="'puntos encontrados'" (listSorted)="listSorted($event)">
+    <ng-template let-punto>
+        <tr>
+            <td scope="row ">{{punto.id}}</td>
             <td>{{punto.latitud}}</td>
             <td>{{punto.longitud}}</td>
             <td>{{punto.desc}}</td>
-            <td><button class='btn btn-default' color="warn" title="borrar" (click)="borrarMapa(punto)"> 
-                <fa-icon [icon]="faTrash"></fa-icon> </button>
+            <td><button class='btn btn-default' color="warn " title="borrar " (click)="borrarMapa(punto) "> 
+                <fa-icon [icon]="faTrash "></fa-icon> </button>
             </td>
         </tr>
-
-    </tbody>
-</table>
+    </ng-template>
+</ngx-sortable>
