@@ -5,6 +5,7 @@
             <th>registro</th>
             <th>Latitud</th>
             <th>Longitud</th>
+            <th>Titulo</th>
             <th>Opciones</th>
         </tr>
     </thead>
@@ -13,6 +14,7 @@
             <td scope="row">{{punto.id}}</td>
             <td>{{punto.latitud}}</td>
             <td>{{punto.longitud}}</td>
+            <td>{{punto.desc}}</td>
             <td><button class='btn btn-default' color="warn" title="borrar" (click)="borrarMapa(punto)"> 
                 <fa-icon [icon]="faTrash"></fa-icon> </button>
             </td>
