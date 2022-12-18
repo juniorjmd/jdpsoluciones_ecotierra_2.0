@@ -28,6 +28,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { BienvenidaComponent } from './components/bienvenida/bienvenida.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgxSortableModule } from 'ngx-sortable';
+import {DragDropModule} from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import { NgxSortableModule } from 'ngx-sortable';
     MatListModule,
     MatExpansionModule,
     FontAwesomeModule,
-    AppRoutingModule,NgxSortableModule 
+    AppRoutingModule,NgxSortableModule ,DragDropModule
   ],
   providers: [MapasService],
   bootstrap: [AppComponent]

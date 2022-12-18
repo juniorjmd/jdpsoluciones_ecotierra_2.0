@@ -1,25 +1,30 @@
 <h3>listas de coordenadas guardadass</h3>
-<table class="table table-striped table-inverse table-responsive">
-    <thead class="thead-inverse">
-        <tr>
-            <th>registro</th>
-            <th>Latitud</th>
-            <th>Longitud</th>
-            <th>Titulo</th>
-            <th>Opciones</th>
-        </tr>
-    </thead>
-</table>
-<ngx-sortable [items]="puntos" [name]="'puntos encontrados'" (listSorted)="listSorted($event)">
-    <ng-template let-punto>
-        <tr>
-            <td scope="row ">{{punto.id}}</td>
-            <td>{{punto.latitud}}</td>
-            <td>{{punto.longitud}}</td>
-            <td>{{punto.desc}}</td>
-            <td><button class='btn btn-default' color="warn " title="borrar " (click)="borrarMapa(punto) "> 
-                <fa-icon [icon]="faTrash "></fa-icon> </button>
-            </td>
-        </tr>
-    </ng-template>
-</ngx-sortable>
+
+
+
+
+<div cdkDropList (cdkDropListDropped)="listSorted($event)">
+    <div class="example-box" *ngFor="let punto of puntos" cdkDrag>
+        <ul class="list-group">
+            <li class="list-group-item">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <ul class="list-group grpInterno">
+                            <li>{{punto.desc}}</li>
+                            <li>Longitud : {{punto.longitud}}</li>
+                            <li>Latitud : {{punto.latitud}}</li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-2"><button class='btn btn-default' color="warn " title="borrar " (click)="borrarMapa(punto) "> 
+                        <fa-icon [icon]="faTrash "></fa-icon> </button>
+                    </div>
+                    <div class="col-sm-2"><button class='btn btn-default' color="warn " title="borrar " (click)="editarMapa(punto) "> 
+                                <fa-icon [icon]="faEdit "></fa-icon> </button>
+                    </div>
+                </div>
+            </li>
+        </ul>
+
+
+    </div>
+</div>

@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { Mapa } from 'src/app/models/mapa';
 import { MapasService } from 'src/app/services/mapas.service';
-import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
 import Swal from 'sweetalert2';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 @Component({
   selector: 'app-listas',
   templateUrl: './listas.component.html',
@@ -10,14 +11,18 @@ import Swal from 'sweetalert2';
 })
 export class ListasComponent {
   puntos:Mapa[] ; 
+  
 
   faTrash = faTrash;
+  faEdit = faEdit;
   constructor( private mapasServicio:MapasService){
     this.puntos=[{ id:0, longitud:0,
       latitud:0}]
       this.getCoordenadas();
 
   }
+
+  editarMapa(punto:Mapa){}
   getCoordenadas() {
     this.puntos =[{ id:0, longitud:0,
       latitud:0}];
@@ -36,10 +41,11 @@ export class ListasComponent {
       error : (err ) => console.log(err) 
     }
     );
-  }
-  listSorted(e:any){
-
-  }
+  } 
+listSorted(event: CdkDragDrop<string[]>) {
+  moveItemInArray(this.puntos, event.previousIndex, event.currentIndex);
+}
+ 
   borrarMapa( Mapa: Mapa){
 
     Swal.fire({
