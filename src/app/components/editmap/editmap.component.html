@@ -1,1 +1,44 @@
-<p>editmap works!</p>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="card" style="width: 18rem;">
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <br>
+                    <h6 style="font-family:cursive;  ">Actualizar Puntos</h6>
+                    <hr>
+                </div>
+
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-4">Longitud</div>
+                    <div class="col-sm-8"><input [(ngModel)]="puntoSeleccionado.longitud" class="form-control" type="number" id="longitudInput"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Latitud</div>
+                    <div class="col-sm-8"><input [(ngModel)]="puntoSeleccionado.latitud" class="form-control" type="number" id="latitudInput"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">Título</div>
+                    <div class="col-sm-8"><input maxlength="30" [(ngModel)]="puntoSeleccionado.desc" class="form-control" type="text" id="latitudInput"></div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4"> </div>
+                    <div class="col-sm-8"><br>
+                        <button type="button" (click)="guardarMapa()" class="btn btn-success">
+                            <fa-icon [icon]="faSave"></fa-icon> 
+                            Guardar</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
+
+
+
+</div>

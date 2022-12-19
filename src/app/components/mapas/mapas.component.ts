@@ -51,12 +51,7 @@ export class MapasComponent  implements AfterViewInit  {
 
     
  localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
-     
-
-    
-
-
-     
+ 
   }
 
 
@@ -73,7 +68,8 @@ export class MapasComponent  implements AfterViewInit  {
          console.log(res);
          if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
           alert("El punto fue registrado con exito");
-          this.getCoordenadas(); 
+          this.puntos = res.datos;
+          this.agregarPuntosAlMap();
           this.puntosClick.splice(index, 1); 
           localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
 
@@ -102,7 +98,8 @@ export class MapasComponent  implements AfterViewInit  {
          console.log(res);
          if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
           alert("El punto fue registrado con exito");
-          this.getCoordenadas();
+          this.puntos = res.datos;
+          this.agregarPuntosAlMap()
           this.puntoSeleccionado = { id:0,
             latitud: 0 ,
             longitud: 0 ,
@@ -194,7 +191,25 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
 }
      
    
-     
+   agregarPuntosAlMap(){
+    let cont = 0;
+    let array : LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][] = [] ;
+    this.puntos.forEach(punto=>{
+      const l1 = (punto.latitud === undefined) ?0 : punto.latitud;
+      const l2 = (punto.longitud === undefined) ?0 : punto.longitud;
+
+      const lnew = L
+      let coordenada:LatLngExpression = [ l1, l2 ] ; 
+      console.log('click en el mapa' ,coordenada);  
+      lnew.marker(coordenada,{title :punto.desc }).addTo(this.map); 
+      array[cont] = coordenada ;
+      cont++;
+      if(cont == 3 ){
+        cont =  0; 
+        L.polygon(array).addTo(this.map);
+      }
+    }) 
+   }  
 
   getCoordenadas() {
     this.puntos =[{ id:0, longitud:0,
@@ -204,24 +219,9 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
  
         if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){ 
            
-          this.puntos = res.datos; 
-          let cont = 0;
-          let array : LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][] = [] ;
-          this.puntos.forEach(punto=>{
-            const l1 = (punto.latitud === undefined) ?0 : punto.latitud;
-            const l2 = (punto.longitud === undefined) ?0 : punto.longitud;
- 
-            const lnew = L
-            let coordenada:LatLngExpression = [ l1, l2 ] ; 
-            console.log('click en el mapa' ,coordenada);  
-            lnew.marker(coordenada,{title :punto.desc }).addTo(this.map); 
-            array[cont] = coordenada ;
-            cont++;
-            if(cont == 3 ){
-              cont =  0; 
-              L.polygon(array).addTo(this.map);
-            }
-          }) 
+          this.puntos = Object.values(res.datos)  ; 
+         
+         this.agregarPuntosAlMap();
 
 
         }

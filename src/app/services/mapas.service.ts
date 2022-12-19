@@ -1,90 +1,63 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Mapa } from '../models/mapa';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Mapa, ordenMap } from '../models/mapa';
 import { MapaRequest } from '../models/mapa-request';
+import { global } from './globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MapasService {
-  URL = 'https://ecotierra.jdpsoluciones.com/API/action/';
+ // URL = 'https://ecotierra.jdpsoluciones.com/API/action/';
+ URL = global.url
+  headers = new HttpHeaders().set('Content-Type' , 'application/x-www-form-urlencoded');
+  optHeader =  {headers : this.headers } ;
+
   constructor(private http: HttpClient) { 
     console.log('servicio mapas inicializado');
     
   }
-
- 
-
-   obtenerMapas() { 
-    const action = {
-      action : 'GET_MAPAS'
-    } 
-    console.log(this.URL ,action );
-    
-    return this.http.post<MapaRequest>(this.URL , action);
+  obtenerMapas() {  
+     return this.http.get<MapaRequest>( `${this.URL}mapas` , this.optHeader);
   }
 
   ingresarMapa(Mapa: Mapa){
-    const action = {
-      action : 'SET_MAPA',
+    const action = { 
       latitud: Mapa.latitud , 
       longitud : Mapa.longitud , 
       desc : Mapa.desc
     } 
-    console.log(this.URL ,action );
-    
-    return this.http.post<MapaRequest>(this.URL , action);
-  }
 
-  borrarMapa(_ID_MAPA:number){
-    const action = {
-      action : 'DELETE_MAPA',
-      _ID_MAPA 
-    } 
-    console.log(this.URL ,action );
+    let params = 'json=' + JSON.stringify(action); 
     
-    return this.http.post<MapaRequest>(this.URL , action);
+    return this.http.post<MapaRequest>(`${this.URL}mapas` , params , this.optHeader );
   }
-
-  altaMapa(Mapa: Mapa) {
-    const uri = `${this.URL}insertarPunto.php`;
-    console.log(uri);
-    
-    return this.http.post(uri, JSON.stringify(Mapa));
+  ordenarListaMapa(lista: ordenMap[]){
+    let params = 'json=' + JSON.stringify(lista); 
+    return this.http.post<MapaRequest>(`${this.URL}mapas/sorte` , params , this.optHeader );
   }
-
-  bajaMapa(idMapa: number) {
-    const uri = `${this.URL}eliminarPunto.php`;
-    console.log(uri);
-    return this.http.get(`${uri}?idMapa=${idMapa}`);
+  borrarMapa(_ID_MAPA:number){    
+    return this.http.delete<MapaRequest>(`${this.URL}mapas/${_ID_MAPA}` , this.optHeader);
   }
 
   
-  seleccionarMapa(_ID_MAPA: number) {
-    const action = {
-      action : 'GET_MAPAS',
-      _ID_MAPA 
-    } 
-    return this.http.post<MapaRequest>(this.URL, action);
+
+  
+  seleccionarMapa(_ID_MAPA: number) { 
+    return this.http.get<MapaRequest>(`${this.URL}mapas/${_ID_MAPA}`, this.optHeader);
   }
 
 
 
 
-  editarMapa(Mapa: Mapa) { 
-  const action = {
-    action : 'UPDATE_MAPA',
-    Mapa 
-  } 
-    return this.http.post<MapaRequest>(this.URL,action);
+  editarMapa(Mapa: Mapa) {  
+  let params = 'json=' + JSON.stringify(Mapa); 
+  console.log(`${this.URL}mapas/${Mapa.id}`, params, this.optHeader);
+  
+    return this.http.put<MapaRequest>(`${this.URL}mapas/${Mapa.id}`, params, this.optHeader);
   }
 
-  _editarMapa(Mapa: Mapa) {
-    const uri = `${this.URL}editarPunto.php`;
-    console.log(uri);
-    console.log("jelou",Mapa);
-    return this.http.post(uri, JSON.stringify(Mapa));
-  }
+  
 
 
 }
