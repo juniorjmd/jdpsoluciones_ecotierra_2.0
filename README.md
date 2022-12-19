@@ -42,6 +42,17 @@ Pass : Prom2001josdom*
 git
 https://github.com/juniorjmd/jdpsoluciones_ecotierra_2.0.git
 
+para modificar el proyecto angular descargan o clonan el repositorio
+
+luego en la terminal se dirigen a la carpeta del proyecto y ingresan el comando 
+
+npm install y presionan enter. esto instalara las dependencias del proyecto.
+
+en el proyecto el servicio esta apuntando al servicio https://ecotierra2.back.jdpsoluciones.com/api/
+
+ese subdominio esta apuntando a la carpeta donde esta el backend en el servidor.
+
+
 
 url aplicacion
 
