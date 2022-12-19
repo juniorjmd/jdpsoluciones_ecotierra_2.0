@@ -32,15 +32,10 @@ base de datos
 jdpsoluc_ecotierra
 Prom2001josdom*
 
-
-
-ftp 
-ecotierra@jdpsoluciones.com
-Promjosdom*
-
+ 
 
 git
-https://github.com/juniorjmd/jdpsoluc_ecotierra
+https://github.com/juniorjmd/jdpsoluciones_ecotierra_2.0.git
 
 
 url aplicacion

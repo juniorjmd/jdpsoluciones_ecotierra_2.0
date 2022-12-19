@@ -47,6 +47,8 @@ export class MapasComponent  implements AfterViewInit  {
 
   }
   deleteStorage(punto:Mapa , index:number){ 
+    
+    this.map.removeLayer(punto.mrk)
     this.puntosClick.splice(index, 1);  
 
     
