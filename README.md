@@ -32,7 +32,12 @@ base de datos
 jdpsoluc_ecotierra
 Prom2001josdom*
 
- 
+
+ftp
+Nombre de usuario FTP: ecotierra_2.0@jdpsoluciones.com
+Servidor FTP: ftp.jdpsoluciones.com
+Puerto FTPS explícito de FTP &:  21
+Pass : Prom2001josdom*
 
 git
 https://github.com/juniorjmd/jdpsoluciones_ecotierra_2.0.git
@@ -40,4 +45,9 @@ https://github.com/juniorjmd/jdpsoluciones_ecotierra_2.0.git
 
 url aplicacion
 
-https://ecotierra.jdpsoluciones.com/
+https://ecotierra2.jdpsoluciones.com/
+
+
+backend 
+version php 7.3.10 
+Laravel Framework 5.7.29
