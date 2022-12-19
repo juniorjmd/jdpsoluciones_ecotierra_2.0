@@ -6,6 +6,7 @@ export interface Mapa {
     updated_at?:string,
     created_at?: string,
     sorte?: number
+    mrk?:any
 } 
 
 export interface ordenMap {

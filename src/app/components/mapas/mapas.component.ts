@@ -50,7 +50,7 @@ export class MapasComponent  implements AfterViewInit  {
     this.puntosClick.splice(index, 1);  
 
     
- localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
+ //localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
  
   }
 
@@ -67,11 +67,17 @@ export class MapasComponent  implements AfterViewInit  {
       { next : (res ) => {
          console.log(res);
          if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
-          alert("El punto fue registrado con exito");
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.puntos = res.datos;
           this.agregarPuntosAlMap();
           this.puntosClick.splice(index, 1); 
-          localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
+          //localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
 
 
          }
@@ -96,8 +102,14 @@ export class MapasComponent  implements AfterViewInit  {
     this.mapasServicio.ingresarMapa(this.puntoSeleccionado).subscribe(
       { next : (res ) => {
          console.log(res);
-         if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){  
-          alert("El punto fue registrado con exito");
+         if (res.RESPONS === 'ok' || res.RESPONS === 'OK' ){   
+          Swal.fire({
+            position: 'top-end',
+            icon: 'success',
+            title: res.message,
+            showConfirmButton: false,
+            timer: 1500
+          })
           this.puntos = res.datos;
           this.agregarPuntosAlMap()
           this.puntoSeleccionado = { id:0,
@@ -105,6 +117,7 @@ export class MapasComponent  implements AfterViewInit  {
             longitud: 0 ,
             desc:''
             };
+          
          }
         
           else{
@@ -176,29 +189,44 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
   aux  = localStorage.getItem('lon') !== null ? localStorage.getItem('lon') : '0' 
   let l2 = (aux ) ? parseFloat(aux) : 0; 
   this.puntoSeleccionado.longitud= l2;
-  this.addMarker([l1,l2])
+  
+const mrk = this.addMarker([l1,l2] , '',true)
+console.log('mrk' , mrk);
 
   this.puntosClick.push( {
     id : 0 ,
     longitud : l2 ,
    latitud : l1,
-   desc :''
+   desc :'',
+   mrk : mrk
  }) 
 
- localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
+// localStorage.setItem('PUNTOS_CLICK' , JSON.stringify(this.puntosClick) )
 }
 
 }
      
+  limpiarPuntosClick(){
    
+    console.log( this.puntosClick);
+    
+    this.puntosClick.forEach((punto)=>{ 
+      this.map.removeLayer(punto.mrk)
+    })
+    
+    this.puntosClick = [];
+  } 
    agregarPuntosAlMap(){
+    this. limpiarPuntosClick();
     let cont = 0;
     let array : LatLngExpression[] | LatLngExpression[][] | LatLngExpression[][][] = [] ;
+     
     this.puntos.forEach(punto=>{
       const l1 = (punto.latitud === undefined) ?0 : punto.latitud;
       const l2 = (punto.longitud === undefined) ?0 : punto.longitud;
 
       const lnew = L
+     
       let coordenada:LatLngExpression = [ l1, l2 ] ; 
       console.log('click en el mapa' ,coordenada);  
       lnew.marker(coordenada,{title :punto.desc }).addTo(this.map); 
@@ -209,6 +237,7 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
         L.polygon(array).addTo(this.map);
       }
     }) 
+ 
    }  
 
   getCoordenadas() {
@@ -236,7 +265,7 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
   }
 
 
-    addMarker(coordenada:LatLngExpression,title?:string){    
+    addMarker(coordenada:LatLngExpression,title?:string, click = false ){    
       console.log('coordenada markes', coordenada);
       let option =   {
         title: title ,
@@ -245,7 +274,11 @@ if(localStorage.getItem('lat') !== null && localStorage.getItem('lon') !== null 
     }
  
         
-         marker(coordenada,option).addTo(this.map);       
+      const mak =    marker(coordenada,option).addTo(this.map);       
+      if(click){
+        return mak
+      }
+      return;
 
     }
   }
